@@ -1,9 +1,10 @@
 function pad (str, max) {
     str = str.toString();
     return str.length < max ? pad("0" + str, max) : str;
-}
+};
 
 function formatImporte(importe) {
+    importe = parseFloat(importe);
     // I need a 2 decimal precision
     importe = importe.toFixed(2);
     // toFixed retuns a string, I need a float
@@ -15,4 +16,4 @@ function formatImporte(importe) {
     importe = importe.toFixed(0);
     // We need to pad it to a fixed 14 positions as the pdf says
     return pad(importe, 14);
-}
+};

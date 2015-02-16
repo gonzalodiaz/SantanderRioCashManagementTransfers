@@ -11,46 +11,61 @@ function BancoRioTransfer(
     this.numero_de_envio = new Date().getTime() * 100;
     this.rows = [];
 
-    this.addRow = function(row) {
-        this.rows.push(row);
-    };
+    this.codigos_concepto_transferencia = [
+        "ALQ", "VAR", "EXP", "CUO", "FAC", "PRE", "SEG", "HON"
+    ];
+}
 
-    this.getImporteTotal = function() {
-        return this.rows
-        .map(function(node){ return node.importe })
-        .reduce(function(sum, importe){
-            return sum + importe;
-        }, 0);
-    }
+BancoRioTransfer.prototype.addRow = function(row) {
+    this.rows.push(row);
+};
 
-    this.getFormattedImporteTotal = function() {
-        return formatImporte(this.getImporteTotal());
-    }
+BancoRioTransfer.prototype.getImporteTotal = function() {
+    return this.rows
+    .map(function(node){ return node.getImporte(); })
+    .reduce(function(sum, importe){
+        return sum + importe;
+    }, 0);
+}
 
-    this.getHeader = function() {
-        var elements = [
-            'H',
-            this.banco_cuenta_debito,
-            this.sucursal_cuenta_debito,
-            this.tipo_cuenta_debito,
-            pad(this.numero_cuenta_debito, 7),
-            this.getFormattedImporteTotal(),
-            pad(this.numero_de_envio.toString().slice(-7), 7)
-        ];
-        return elements.join(';')
-    }
+BancoRioTransfer.prototype.getFormattedImporteTotal = function() {
+    return formatImporte(this.getImporteTotal());
+}
 
-    this.getFooter = function() {
-        var elements = [
-            'T',
-            pad(this.rows.length, 4)
-        ];
-        return elements.join(';')
-    }
+BancoRioTransfer.prototype.getHeader = function() {
+    var elements = [
+        'H',
+        this.cuenta_debito,
+        this.sucursal_cuenta_debito,
+        this.tipo_cuenta_debito,
+        pad(this.numero_cuenta_debito, 7),
+        this.getFormattedImporteTotal(),
+        pad(this.numero_de_envio.toString().slice(-7), 7)
+    ];
+    return elements.join(';')
+}
 
-    this.getBody = function() {
-        return this.rows.map(function(node){
-            return node.getFormattedBody();
-        });
+BancoRioTransfer.prototype.getFooter = function() {
+    var elements = [
+        'T',
+        pad(this.rows.length, 4)
+    ];
+    return elements.join(';')
+}
+
+BancoRioTransfer.prototype.getBody = function() {
+    return this.rows.map(function(node){
+        return node.getFormattedBody();
+    });
+}
+
+
+BancoRioTransfer.prototype.dump = function() {
+    var content = []
+    content.push(this.getHeader());
+    if(this.getBody().length > 0) {
+        content.push(this.getBody().join("\n"));
     }
+    content.push(this.getFooter());
+    return content.join("\n");
 }

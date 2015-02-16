@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Banco Rio Transfers App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+
+    <script src="js/utils.js"></script>
+    <script src="js/banco_rio.js"></script>
+    <script src="js/otras_cuentas.js"></script>
+    <script src="js/otros_bancos.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+
+  <body ng-app="BRApp">
+    <div class="container">
+
+      <div class="row">
+        <div ng-controller="BRSantanderOtrasCuentasController">
+          <form novalidate class="form-inline">
+            <input type="text" class="form-control" ng-model="transfer.sucursal_destino" placeholder="Sucursal" />
+            <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
+              <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
+            </select>
+            <input type="text" class="form-control" ng-model="transfer.numero_cuenta_destino" placeholder="Numero de Cuenta"></input>
+            <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
+            <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripcion"></input>
+            <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
+              <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
+            </select>
+            <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
+
+            <input class="btn btn-default" type="submit" ng-click="update(transfer)" value="Save" />
+          </form>
+        </div>
+
+        <div ng-controller="BROtrosBancosController">
+          <form novalidate class="form-inline">
+            <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
+            <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripcion"></input>
+            <input type="text" class="form-control" ng-model="transfer.cbu" placeholder="CBU"></input>
+            <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
+              <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
+            </select>
+            <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
+            <input type="text" class="form-control" ng-model="transfer.cuit" placeholder="CUIT"></input>
+            <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
+              <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
+            </select>
+            <input class="btn btn-default" type="submit" ng-click="update(transfer)" value="Save" />
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="">
+          <div ng-controller="BRController">
+            <div class="br_file_result">
+              <pre>{{br.dump()}}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
