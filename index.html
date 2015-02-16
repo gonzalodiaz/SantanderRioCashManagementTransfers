@@ -25,12 +25,34 @@
   </head>
 
   <body ng-app="BRApp">
+
     <div class="container-fluid">
+      <div class="row">
+        <div ng-controller="BRConfig" class="col-md-12">
+          <div class="panel panel-default" ng-show="!br.active">
+            <div class="panel-body">
+              <form novalidate class="form-inline">
+                <input type="text" class="form-control" ng-model="config.sucursal_cuenta_debito" placeholder="Sucursal" />
+                <input type="text" class="form-control" ng-model="config.cuenta_debito" placeholder="Cuenta Debito" />
+                <select class="form-control" ng-model="config.tipo_cuenta_debito">
+                  <option value="00">Cuenta Corriente en Pesos</option>
+                  <option value="01">Caja de Ahorro en Pesos</option>
+                  <option value="02">Cuenta Corriente en Dólares</option>
+                  <option value="03">Caja de Ahorro en Dólares</option>
+                </select>
+                <input type="text" class="form-control" ng-model="config.numero_cuenta_debito" placeholder="Numero Cuenta Debito" />
+                <input class="btn btn-primary" ng-disabled="br.active" type="submit" ng-click="update(config)" value="Set" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">Otras Cuentas de Banco Rio</div>
-            <div class="panel-body">
+            <div class="panel-body" ng-if="br.active">
               <form novalidate class="form-horizontal">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Sucursal</label>
@@ -81,7 +103,7 @@
 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <input class="btn btn-primary" type="submit" ng-click="update(transfer)" value="Agregar" />
+                    <input class="btn btn-primary" ng-disabled="br.active" type="submit" ng-click="update(transfer)" value="Agregar" />
                   </div>
                 </div>
               </form>
@@ -92,7 +114,7 @@
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">Otras Cuentas de Otros Bancos</div>
-            <div class="panel-body">
+            <div class="panel-body" ng-if="br.active">
               <form novalidate class="form-horizontal">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">CBU</label>
@@ -153,9 +175,9 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div ng-controller="BRController">
+          <div ng-controller="BRController">
+            <div class="panel panel-default">
+              <div class="panel-body" ng-if="br.active">
                 <table class="table">
                   <tr>
                     <th>#</th>

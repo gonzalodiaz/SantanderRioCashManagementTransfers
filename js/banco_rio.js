@@ -1,4 +1,15 @@
-function BancoRioTransfer(
+function BancoRioTransfer() {
+    this.numero_de_envio = new Date().getTime() * 100;
+    this.rows = [];
+    this.active = false;
+
+    this.codigos_concepto_transferencia = [
+        "ALQ", "VAR", "EXP", "CUO", "FAC", "PRE", "SEG", "HON"
+    ];
+};
+
+
+BancoRioTransfer.prototype.fill = function (
         cuenta_debito,
         sucursal_cuenta_debito,
         tipo_cuenta_debito,
@@ -8,13 +19,9 @@ function BancoRioTransfer(
     this.sucursal_cuenta_debito = sucursal_cuenta_debito;;
     this.tipo_cuenta_debito = tipo_cuenta_debito;;
     this.numero_cuenta_debito = numero_cuenta_debito;
-    this.numero_de_envio = new Date().getTime() * 100;
-    this.rows = [];
+    this.active = true;
+};
 
-    this.codigos_concepto_transferencia = [
-        "ALQ", "VAR", "EXP", "CUO", "FAC", "PRE", "SEG", "HON"
-    ];
-}
 
 BancoRioTransfer.prototype.addRow = function(row) {
     this.rows.push(row);
@@ -58,7 +65,6 @@ BancoRioTransfer.prototype.getBody = function() {
         return node.getFormattedBody();
     });
 }
-
 
 BancoRioTransfer.prototype.dump = function() {
     var content = []
