@@ -16,159 +16,176 @@
     <script src="js/otras_cuentas.js"></script>
     <script src="js/otros_bancos.js"></script>
     <script src="js/app.js"></script>
+
+    <style>
+      body {
+        margin-top: 1em;
+      }
+    </style>
   </head>
 
   <body ng-app="BRApp">
     <div class="container-fluid">
       <div class="row">
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
-          <h2>Otras Cuentas de Banco Rio</h2>
-          <form novalidate class="form-horizontal">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Sucursal</label>
-              <div class="col-sm-10">
-                <input type="text" class="col-sm-10 form-control" ng-model="transfer.sucursal_destino" placeholder="Sucursal" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Nro Cuenta</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.numero_cuenta_destino" placeholder="Numero de Cuenta"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Tipo Cuenta</label>
-              <div class="col-sm-10">
-                <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
-                  <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Importe</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Concepto</label>
-              <div class="col-sm-10">
-                <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
-                  <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Descripción</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripción"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Informacion Adicional</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
-              </div>
-            </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Otras Cuentas de Banco Rio</div>
+            <div class="panel-body">
+              <form novalidate class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Sucursal</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="col-sm-10 form-control" ng-model="transfer.sucursal_destino" placeholder="Sucursal" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Nro Cuenta</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.numero_cuenta_destino" placeholder="Numero de Cuenta"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tipo Cuenta</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
+                      <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Importe</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Concepto</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
+                      <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Descripción</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripción"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Informacion Adicional</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
+                  </div>
+                </div>
 
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <input class="btn btn-primary" type="submit" ng-click="update(transfer)" value="Agregar" />
-              </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <input class="btn btn-primary" type="submit" ng-click="update(transfer)" value="Agregar" />
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
 
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
-          <h2>Otras Cuentas de Otros Bancos</h2>
-          <form novalidate class="form-horizontal">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">CBU</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.cbu" placeholder="CBU"></input>
-              </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Otras Cuentas de Otros Bancos</div>
+            <div class="panel-body">
+              <form novalidate class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">CBU</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.cbu" placeholder="CBU"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">CUIT</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.cuit" placeholder="CUIT"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tipo Cuenta</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
+                      <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Importe</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Concepto</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
+                      <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Descripción</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripción"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Informacion Adicional</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <input class="btn btn-primary" type="submit" ng-click="update(transfer)" value="Agregar" />
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">CUIT</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.cuit" placeholder="CUIT"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Tipo Cuenta</label>
-              <div class="col-sm-10">
-                <select class="form-control" ng-model="transfer.tipo_cuenta_destino">
-                  <option ng-repeat="tipo in transfer.tipos_cuenta_destino" ng-selected="{{transfer.tipo_cuenta_destino == tipo.key}}" value="{{tipo.key}}">{{tipo.tipo}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Importe</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.importe" placeholder="Importe"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Concepto</label>
-              <div class="col-sm-10">
-                <select class="form-control" ng-model="transfer.codigo_concepto_transferencia">
-                  <option ng-repeat="concepto in br.codigos_concepto_transferencia" ng-selected="transfer.codigo_concepto_transferencia==concepto" value="{{concepto}}">{{concepto}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Descripción</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.descripcion" placeholder="Descripción"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Informacion Adicional</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="transfer.informacion_adicional" placeholder="Informacion Adicional"></input>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <input class="btn btn-primary" type="submit" ng-click="update(transfer)" value="Agregar" />
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="br_file_result col-sm-10 col-sm-offset-1">
-        <h2>Resultado del archivo</h2>
-          <div ng-controller="BRController">
-            <table class="table">
-              <tr>
-                <th>#</th>
-                <th>Sucursal/CBU</th>
-                <th>Numero Cuenta/CUIT</th>
-                <th>Importe</th>
-                <th>Descripción</th>
-                <th>Información Adicional</th>
-              </tr>
-              <tr ng-repeat="(key, transfer) in br.rows">
-                <td>{{key+1}}</td>
-                <td>{{transfer.sucursal_destino?transfer.sucursal_destino:transfer.cbu}}</td>
-                <td>{{transfer.numero_cuenta_destino?transfer.numero_cuenta_destino:transfer.cuit}}</td>
-                <td>{{transfer.getImporte()}}</td>
-                <td>{{transfer.descripcion}}</td>
-                <td>{{transfer.informacion_adicional}}</td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td>{{br.getImporteTotal()}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div ng-controller="BRController">
+                <table class="table">
+                  <tr>
+                    <th>#</th>
+                    <th>Sucursal/CBU</th>
+                    <th>Numero Cuenta/CUIT</th>
+                    <th>Importe</th>
+                    <th>Descripción</th>
+                    <th>Información Adicional</th>
+                  </tr>
+                  <tr ng-repeat="(key, transfer) in br.rows">
+                    <td>{{key+1}}</td>
+                    <td>{{transfer.sucursal_destino?transfer.sucursal_destino:transfer.cbu}}</td>
+                    <td>{{transfer.numero_cuenta_destino?transfer.numero_cuenta_destino:transfer.cuit}}</td>
+                    <td>{{transfer.getImporte()}}</td>
+                    <td>{{transfer.descripcion}}</td>
+                    <td>{{transfer.informacion_adicional}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td>{{br.getImporteTotal()}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
 
-            <pre>{{br.dump()}}</pre>
+                <pre>{{br.dump()}}</pre>
+              </div>
+            </div>
           </div>
         </div>
       </div>
