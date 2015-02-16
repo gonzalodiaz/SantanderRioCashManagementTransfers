@@ -25,7 +25,7 @@ BancoRioTransfer.prototype.getImporteTotal = function() {
     .map(function(node){ return node.getImporte(); })
     .reduce(function(sum, importe){
         return sum + importe;
-    }, 0);
+    }, 0.0);
 }
 
 BancoRioTransfer.prototype.getFormattedImporteTotal = function() {
