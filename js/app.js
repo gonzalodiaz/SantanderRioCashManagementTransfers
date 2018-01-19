@@ -72,29 +72,25 @@ angular.module('BRApp', [])
           var headers = allLines[0].split(',');
           for (var i = 1; i < allLines.length; i++) {
             // split content based on comma
-            var data = allLines[i].split(',');
-            if (data.length == headers.length) {
-              var row = [];
-              for (var j = 0; j < headers.length; j++) {
-                row.push(data[j]);
-              }
+            var row = allLines[i].split(',');
+            if (row.length == headers.length) {
               // Estructura del archivo
               // importe,es_santander,cbu,cuit,tipo_cuenta,sucursal,numero_de_cuenta,concepto
               transfer = null;
-              descripcion =
-                is_santander = row[1] === 'SI' ? true : false;
+              descripcion = $scope.makeDescription(20);
+              is_santander = row[1] === 'SI' ? true : false;
               if (is_santander) {
                 transfer = new SantanderOtrasCuentas();
                 transfer.sucursal_destino = row[5];
                 transfer.numero_cuenta_destino = row[6];
                 transfer.tipo_cuenta_destino = row[4];
                 transfer.importe = row[0];
-                transfer.descripcion = $scope.makeDescription(20);
+                transfer.descripcion = descripcion;
                 transfer.codigo_concepto_transferencia = row[7];
               } else {
                 transfer = new OtrosBancos();
                 transfer.importe = row[0];
-                transfer.descripcion = $scope.makeDescription(20);
+                transfer.descripcion = descripcion;
                 transfer.cbu = row[2],
                   transfer.codigo_concepto_transferencia = row[7];
                 transfer.cuit = row[3],
@@ -139,11 +135,6 @@ angular.module('BRApp', [])
               0, 0, 0, 0, 0, false, false, false, false, 0, null);
             a.dispatchEvent(e);
           }
-        };
-
-        $scope.walk = function(arr, n, fn) {
-          for (var i = 0; i < arr.length; i += n)
-            fn(arr.slice(i, i + n));
         };
 
         $scope.exportFile = function() {

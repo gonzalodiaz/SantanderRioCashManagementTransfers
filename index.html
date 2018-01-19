@@ -56,17 +56,25 @@
               <pre>
               Estructura del archivo
 
-              importe,es santander,cbu,cuit,tipo cuenta,sucursal,numero de cuenta,concepto
+              Importe,Es Santander,CBU,CUIT,Tipo Cuenta,Sucursal,Numero de Cuenta,Concepto
 
               Explicación
-              importe: Decimales separados por punto.
-              es santander: SI para cuentas santander. NO para otros bancos.
+              Importe: Decimales separados por punto.
+              Es Santander: SI para cuentas santander. NO para otros bancos.
               CBU: opcional, solo para otros bancos.
               CUIT: opcional, solo para otros bancos.
-              tipo de cuenta: el tipo de cuenta.
-              sucursal: opcional, solo para cuentas Santander.
-              numero de cuenta: opcional, solo para cuentas Santander.
-              concepto: concepto de la transferencia, codigo de 3 letras.
+              Tipo de Cuenta: el tipo de cuenta, código de 2 numeros
+                  "00": "Cuenta Corriente en Pesos"
+                  "01": "Caja de Ahorro en Pesos"
+                  "03": "Cuenta Corriente en Dolares"
+                  "04": "Caja de Ahorro en Dolares"
+                  "09": "Cuenta Unica en Pesos"
+                  "10": "Cuenta Unica en Dolares"
+              Sucursal: opcional, solo para cuentas Santander.
+              Número de Cuenta: opcional, solo para cuentas Santander.
+              Concepto: concepto de la transferencia, codigo de 3 letras en mayuscula.
+
+              Nota: Incluir cabecera en el archivo.
               </pre>
               <div class="panel-body">
                 <input type="file" file-reader="fileContent"/>
