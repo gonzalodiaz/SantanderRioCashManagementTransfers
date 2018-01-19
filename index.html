@@ -48,6 +48,34 @@
         </div>
       </div>
 
+      <div class="container-fluid">
+        <div class="row">
+          <div ng-controller="BRAutogenerateController" class="col-md-12">
+            <div class="panel panel-default" ng-show="br.active">
+              <div class="panel-heading">Importar masivamente Transferencias a realizar</div>
+              <pre>
+              Estructura del archivo
+
+              importe,es santander,cbu,cuit,tipo cuenta,sucursal,numero de cuenta,concepto
+
+              Explicación
+              importe: Decimales separados por punto.
+              es santander: SI para cuentas santander. NO para otros bancos.
+              CBU: opcional, solo para otros bancos.
+              CUIT: opcional, solo para otros bancos.
+              tipo de cuenta: el tipo de cuenta.
+              sucursal: opcional, solo para cuentas Santander.
+              numero de cuenta: opcional, solo para cuentas Santander.
+              concepto: concepto de la transferencia, codigo de 3 letras.
+              </pre>
+              <div class="panel-body">
+                <input type="file" file-reader="fileContent"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div ng-controller="BRSantanderOtrasCuentasController" class="col-md-6">
           <div class="panel panel-default">
@@ -207,6 +235,19 @@
 
                 <pre>{{br.dump()}}</pre>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div ng-controller="BRAutogenerateController" class="col-md-12">
+          <div class="panel panel-default" ng-show="br.active">
+            <div class="panel-heading">Generar archivo de Transferencia</div>
+            <div class="panel-body">
+              <input class="btn btn-primary" type="button" ng-click="exportFile()" value="Generar Archivo" />
             </div>
           </div>
         </div>
